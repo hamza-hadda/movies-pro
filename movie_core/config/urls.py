@@ -14,10 +14,27 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+import logging
+
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
+from django.http import HttpResponse
+
+logger = logging.getLogger(__name__)
+
+
+def is_alive_view(request):
+    html = "Alive!!"
+    logger.info("Is alive reached.")
+    return HttpResponse(html)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('movie_core.core.urls')),  # Add this line to include your app's URLs
+    path('api/', include('movie_core.core.urls')),
+    re_path(
+        r"^$",
+        is_alive_view,
+        name="ping",
+    ),
 ]

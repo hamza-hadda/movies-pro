@@ -7,6 +7,7 @@ from rest_framework.test import APIClient
 def api_client():
     return APIClient()
 
+
 @pytest.fixture
 def actor_data():
     return [
@@ -14,12 +15,14 @@ def actor_data():
         {"first_name": "Jane", "last_name": "Smith"},
     ]
 
+
 @pytest.fixture
 def movie_data(actor_data):
     return [
         {"title": "Movie 1", "description": "Description of Movie 1"},
         {"title": "Movie 2", "description": "Description of Movie 2"},
     ]
+
 
 @pytest.fixture
 def review_data(movie_data):

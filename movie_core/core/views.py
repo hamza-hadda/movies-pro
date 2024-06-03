@@ -11,9 +11,10 @@ class ActorViewSet(
     mixins.DestroyModelMixin,
     mixins.ListModelMixin,
     viewsets.GenericViewSet
-    ):
+):
     queryset = Actor.objects.all()
     serializer_class = ActorSerializer
+
 
 class MovieViewSet(mixins.CreateModelMixin,
                    mixins.RetrieveModelMixin,
@@ -23,6 +24,7 @@ class MovieViewSet(mixins.CreateModelMixin,
                    viewsets.GenericViewSet):
     queryset = Movie.objects.all()
     serializer_class = MovieSerializer
+
 
 class ReviewViewSet(mixins.CreateModelMixin,
                     mixins.RetrieveModelMixin,

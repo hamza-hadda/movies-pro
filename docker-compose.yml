@@ -20,12 +20,11 @@ services:
       - POSTGRES_PASSWORD=postgres
     depends_on:
       - db
+
   front:
-    build:
-      context: vuejs
-      target: development
+    build: movies_web
     ports:
-      - 8080:8080
+      - 80:8080
     volumes:
       - ./vuejs:/project
       - /project/node_modules

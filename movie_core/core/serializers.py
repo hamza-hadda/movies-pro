@@ -9,17 +9,17 @@ class ActorSerializer(serializers.ModelSerializer):
         fields = ['id', 'first_name', 'last_name']
 
 
-class MovieSerializer(serializers.ModelSerializer):
-    actors = ActorSerializer(many=True, read_only=True)
-
-    class Meta:
-        model = Movie
-        fields = ['id', 'title', 'description', 'actors']
-
-
 class ReviewSerializer(serializers.ModelSerializer):
-    movie = MovieSerializer(read_only=True)
 
     class Meta:
         model = Review
-        fields = ['id', 'grade', 'movie']
+        fields = ['id', 'grade']
+
+
+class MovieSerializer(serializers.ModelSerializer):
+    actors = ActorSerializer(many=True, read_only=True)
+    reviews = ReviewSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Movie
+        fields = ['id', 'title', 'description', 'actors', 'reviews']

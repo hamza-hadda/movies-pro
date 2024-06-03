@@ -6,7 +6,7 @@ class CoreConfig(AppConfig):
     name = "movie_core.core"
     verbose_name = _("Core")
 
-    def ready(self):
-        from django.core.management import call_command
-        call_command('load_fixtures')
-
+    # You can use this to load data for the first run of the project
+    # def ready(self):
+    #     from django.core.management import call_command
+    #     call_command('load_fixtures')
