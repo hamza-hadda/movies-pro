@@ -31,12 +31,16 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
+    # DJANGO APPS:
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # THIRD PARTY APPS:
+    'rest_framework',
 
 
     # LOCAL APPS:
@@ -71,7 +75,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'movie.core.config.wsgi.application'
+WSGI_APPLICATION = 'movie_core.config.wsgi.application'
 
 
 # Database
@@ -88,6 +92,12 @@ DATABASES = {
     }
 }
 
+# Header CORS
+# ------------------------------------------------------------------------------
+## TODO: we need to make this more restrictive for more security [ CWE-942 ]
+CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ALLOW_HEADERS = ["*"]
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators

@@ -16,3 +16,16 @@ class Movie(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Review(models.Model):
+    grade = models.IntegerField()
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Review for {self.movie.title} with grade {self.grade}"
+
+    def save(self, *args, **kwargs):
+        if not 1 <= self.grade <= 5:
+            raise ValueError("Grade must be between 1 and 5.")
+        super().save(*args, **kwargs)
