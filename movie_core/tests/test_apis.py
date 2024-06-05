@@ -26,7 +26,6 @@ def test_create_movie_with_actors(api_client, actor_data):
         "actors": actor_data
     }
     response = api_client.post(url, data, format='json')
-    breakpoint()
     assert response.status_code == status.HTTP_201_CREATED
     movie = Movie.objects.get(id=response.data['id'])
     assert movie.title == "New Movie"
