@@ -2,6 +2,8 @@ import pytest
 
 from rest_framework.test import APIClient
 
+from movie_core.core.models import Actor
+
 
 @pytest.fixture
 def api_client():
@@ -15,6 +17,9 @@ def actor_data():
         {"first_name": "Jane", "last_name": "Smith"},
     ]
 
+@pytest.fixture
+def create_actors(db, actor_data):
+    return [Actor.objects.create(**actor) for actor in actor_data]
 
 @pytest.fixture
 def movie_data(actor_data):
