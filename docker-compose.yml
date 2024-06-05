@@ -7,7 +7,12 @@ services:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-  web:
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  web: &web
     build: .
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
@@ -20,6 +25,20 @@ services:
       - POSTGRES_PASSWORD=postgres
     depends_on:
       - db
+    healthcheck:
+      interval: 5s
+      timeout: 10s
+      retries: 10
+  migrate:
+    <<: *web
+    command: >
+      bash -c "./manage.py migrate"
+    ports: [ ]
+    depends_on:
+      db:
+        condition: service_healthy
+      web:
+        condition: service_started
 
   front:
     build: movies_web

@@ -7,6 +7,6 @@ class CoreConfig(AppConfig):
     verbose_name = _("Core")
 
     # You can use this to load data for the first run of the project
-    # def ready(self):
-    #     from django.core.management import call_command
-    #     call_command('load_fixtures')
+    def ready(self):
+        from django.core.management import call_command
+        call_command('load_fixtures')
